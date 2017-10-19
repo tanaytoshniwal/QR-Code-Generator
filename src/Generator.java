@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.google.zxing.BarcodeFormat;
@@ -26,6 +28,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class Generator extends Frame implements ActionListener{
 	Label lbl;
+	JLabel jLabel;
 	TextField txt;
 	Button btn1,btn2;
 	public Generator(String label){
@@ -41,6 +44,7 @@ public class Generator extends Frame implements ActionListener{
 		});
 		setLayout(null);
 		lbl=new Label("Input Text Here:");
+        jLabel = new JLabel();
 		txt=new TextField();
 		txt.setBackground(Color.GRAY);
 		txt.setForeground(Color.BLACK);
@@ -56,10 +60,12 @@ public class Generator extends Frame implements ActionListener{
 		txt.setBounds(200,100,200,20);
 		btn1.setBounds(150,150,200,20);
 		btn2.setBounds(150,200,200,20);
+		jLabel.setBounds(200,250,200,200);
 		add(lbl);
 		add(txt);
 		add(btn1);
 		add(btn2);
+		add(jLabel);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){
@@ -88,6 +94,15 @@ public class Generator extends Frame implements ActionListener{
 					exp.printStackTrace();
 				}
 				JOptionPane.showMessageDialog(this, "Your QR-Code is Generated with text \""+txt.getText()+"\"","Congratulations!",JOptionPane.INFORMATION_MESSAGE);
+				BufferedImage image = null;
+				try{
+					image = ImageIO.read(new File("T:\\WorkSpace\\eclipse1\\QR-code-Generator\\src\\Code.png"));
+				}
+				catch(IOException exp){
+					exp.printStackTrace();
+				}
+				ImageIcon imageIcon = new ImageIcon(image);
+		        jLabel.setIcon(imageIcon);
 				break;
 			}
 		}
