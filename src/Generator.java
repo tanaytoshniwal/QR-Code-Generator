@@ -73,6 +73,7 @@ public class Generator extends Frame implements ActionListener{
 		switch(label){
 			case "Reset":{
 				txt.setText("");
+				jLabel.setIcon(null);
 				break;
 			}
 			case "Generate":{
