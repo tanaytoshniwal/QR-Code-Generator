@@ -87,7 +87,7 @@ public class Generator extends Frame implements ActionListener{
 				catch(WriterException exp){
 					exp.printStackTrace();
 				}
-				JOptionPane.showMessageDialog(this, "Your QR-Code is Generated with text"+txt.getText(),"Congratulations",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Your QR-Code is Generated with text \""+txt.getText()+"\"","Congratulations!",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			}
 		}
