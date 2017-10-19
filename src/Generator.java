@@ -75,7 +75,11 @@ public class Generator extends Frame implements ActionListener{
 				int size = 125;
 				String fileType = "png";
 				try{
-					createQRImage(qrCodeText, size, fileType);
+					String filePath = "T:\\WorkSpace\\eclipse1\\QR-code-Generator\\src\\Code.png";
+					ClassLoader classLoader=getClass().getClassLoader();
+					File qrFile = new File(filePath);
+					//System.out.println(classLoader.getResource(filePath).getFile());
+					createQRImage(qrFile, qrCodeText, size, fileType);
 				}
 				catch(IOException exp){
 					exp.printStackTrace();
@@ -88,9 +92,7 @@ public class Generator extends Frame implements ActionListener{
 			}
 		}
 	}
-	public void createQRImage(String qrCodeText,int size,String fileType) throws IOException,WriterException{
-		String filePath = "T:\\WorkSpace\\eclipse1\\QR-code-Generator\\src";
-		File qrFile = new File(filePath);
+	public void createQRImage(File qrFile,String qrCodeText,int size,String fileType) throws IOException,WriterException{
 		Hashtable hintMap=new Hashtable();
 		hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 		QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -110,7 +112,11 @@ public class Generator extends Frame implements ActionListener{
 				//System.out.println(byteMatrix.get(i,j));
 			}
 		}
-		ImageIO.write(image, fileType, qrFile);
+		try{
+			ImageIO.write(image, fileType, qrFile);
+		}catch(Exception exp){
+			exp.printStackTrace();
+		}
 	}
 	public static void main(String[]  args){
 		new Generator("QR Code Generator").setVisible(true);
